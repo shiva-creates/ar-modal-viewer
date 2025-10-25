@@ -1,32 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
-    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>model-viewer AR test</title>
+
+  <!-- official model-viewer -->
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    body { margin: 0; display:flex; height:100vh; align-items:center; justify-content:center; background:#222; }
+    model-viewer { width:100%; height:100vh; max-height:100vh; }
+  </style>
 </head>
-
 <body>
-
-        <style>
-            .modal-viewer{
-                height: 99vh;
-                width: 99vw;
-                background-color:#4c98bc;
-            }
-        </style>
-
-    <model-viewer class="modal-viewer" src="./assets/leather_shoes.glb" ar
+  <model-viewer
+    id="mv"
+    src="./assets/leather_shoes.glb"
+    alt="Leather shoes 3D model"
+    ar
     ar-modes="webxr scene-viewer quick-look"
     camera-controls
     auto-rotate
-    background-color="#455A64"
-     alt="A 3D model of an astronaut" auto-rotate camera-controls
-    ></model-viewer>
-</body>
+    exposure="1"
+    background-color="#455A64">
+  </model-viewer>
 
+  <script>
+    // Useful runtime logs to debug why AR button may not appear
+    const mv = document.getElementById('mv');
+
+    // Log user agent and simple environment hints
+    console.log('UA:', navigator.userAgent);
+    console.log('Secure context:', window.isSecureContext ? 'yes' : 'no (HTTPS required for WebXR)');
+
+    // Listen for generic errors from model-viewer
+    mv.addEventListener('error', (ev) => {
+      console.error('model-viewer error event:', ev);
+    });
+
+    // model-viewer exposes an `availableARModes` property (string or space-separated modes)
+    // (If your model-viewer version supports it, log it. If not, this will be undefined.)
+    if ('availableARModes' in mv) {
+      console.log('availableARModes:', mv.availableARModes);
+    } else {
+      console.log('availableARModes property not present in this model-viewer build.');
+    }
+
+    // Simple helper that tells the user why AR may not be enabled
+    setTimeout(() => {
+      // If the internal AR button isn't present after page load, give hints.
+      const arButton = mv.shadowRoot?.querySelector('button[slot="ar-button"], button[aria-label="Enter AR"]');
+      if (!arButton) {
+        console.warn('AR button not rendered. Check:\n- Are you on Android Chrome or iOS Safari?\n- Is the server HTTPS or localhost?\n- Do you have a .usdz file and ios-src set for iOS?\n- Check the console for model-viewer errors or CORS/MIME issues.');
+      } else {
+        console.log('AR button is present.');
+      }
+    }, 800);
+  </script>
+</body>
 </html>
