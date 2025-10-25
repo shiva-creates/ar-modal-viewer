@@ -4,30 +4,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <title>AR TEST</title>
+
 
     <style>
         *{
             padding: 0;
             margin: 0;
         }
-        .modal-viewer{
-            background-color: rgb(22, 23, 23);
+        body {
+            background: rgb(22, 23, 23);
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .qr-code-container{
             height: 100vh;
             width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .view-link{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(78, 78, 78, 0.5);
+            border-radius: 30px;
+            padding: 0.5rem 2rem;
+            backdrop-filter: blur(20px);
+            color: white;
+            font-size: 1rem;
+
         }
     </style>
-
 </head>
 
 <body>
-    <model-viewer class="modal-viewer"
-        alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-        src="./assets/Chair.glb" ar 
-         shadow-intensity="1" camera-controls
-        touch-action="pan-y">
-    </model-viewer>
+    <div>
+        <div class="qr-code-container">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="150"
+                height="150" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512"
+                xml:space="preserve" class="">
+                <g>
+                    <defs>
+                        <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                            <path d="M0 512h512V0H0Z" fill="#ffffff" opacity="1" data-original="#000000"></path>
+                        </clipPath>
+                    </defs>
+                    <g clip-path="url(#a)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)">
+                        <path d="M0 0v80h80"
+                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                            transform="translate(20 412)" fill="none" stroke="#ffffff" stroke-width="40"
+                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
+                        </path>
+                        <path d="M0 0h80v-80"
+                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                            transform="translate(412 492)" fill="none" stroke="#ffffff" stroke-width="40"
+                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
+                        </path>
+                        <path d="M0 0h-80v80"
+                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                            transform="translate(100 20)" fill="none" stroke="#ffffff" stroke-width="40"
+                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
+                        </path>
+                        <path d="M0 0v-80h-80"
+                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                            transform="translate(492 100)" fill="none" stroke="#ffffff" stroke-width="40"
+                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
+                        </path>
+                    </g>
+                    <path d="M216 296H96v120h120zM416 296H296v120h120zM216 96H96v120h120z"
+                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                        transform="matrix(1.33333 0 0 -1.33333 0 682.667)" fill="none" stroke="#ffffff"
+                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
+                    <path d="M0 0v-40h40v-40"
+                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                        transform="matrix(1.33333 0 0 -1.33333 394.667 394.667)" fill="none" stroke="#ffffff"
+                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
+                    <path d="M0 0h40"
+                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                        transform="matrix(1.33333 0 0 -1.33333 501.333 554.667)" fill="none" stroke="#ffffff"
+                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
+                    <path d="M0 0h40v-40"
+                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                        transform="matrix(1.33333 0 0 -1.33333 501.333 394.667)" fill="none" stroke="#ffffff"
+                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
+                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
+                    <path d="M0 0h40"
+                        style="stroke-width:40;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                        transform="matrix(1.33333 0 0 -1.33333 368 554.667)" fill="none" stroke="#ffffff"
+                        stroke-width="40" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
+                </g>
+            </svg>
+
+            <div class="view-link"> <a href="https://ar-view-test.netlify.app/">Tap Here : https://ar-view-test.netlify.app/</a></div>
+
+        </div>
+    </div>
 </body>
 
 </html>
