@@ -2,120 +2,257 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR TEST</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firebase Image Upload</title>
+  <!-- Update to the latest modular SDK versions -->
+  <script src="https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.8.2/firebase-storage.js"></script>
+  <script src="qrcode.js"></script>
 
 
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
-        body {
-            background: rgb(34 34 34)
-        }
-        a {
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
+  <style>
+    * {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 20px;
+    }
 
-        .qr-code-container{
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
-        .view-link{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(78, 78, 78, 0.5);
-            border-radius: 30px;
-            padding: 0.5rem 2rem;
-            backdrop-filter: blur(20px);
-            color: white;
-            font-size: 1rem;
-            width: max-content;
-        }
-    </style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+    }
+
+    .file-upload-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #171717;
+      border: 1px solid oklch(100% 0 0 / .1);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+
+    }
+
+    .inp {
+      display: none;
+    }
+
+    .progressBar {
+      width: 250px;
+      background: rgb(39 39 39);
+      padding: 10px 20px;
+      position: relative;
+      border-radius: 50px;
+      /* display: none; */
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #e5e5e5;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #171717;
+      border-radius: 50px;
+    }
+
+    .img {
+      height: 250px;
+      width: 300px;
+      border: 3px solid crimson;
+      -o-object-fit: contain;
+      object-fit: contain;
+      display: none;
+    }
+
+    .selectFile {
+      background: color-mix(in oklab, #ffffff26, transparent);
+      border: 1px solid #ffffff26;
+      color: #e5e5e5;
+      padding: 15px 20px;
+      border-radius: 10px;
+    }
+
+    .upload {
+      background: #e5e5e5;
+      color: #171717;
+      padding: 10px 5rem;
+      border-radius: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      margin: 10px 0;
+    }
+
+    .filedata {
+      background: black;
+      color: white;
+      padding: 10px 15px;
+      font-size: 14px;
+      max-width: 100px;
+      text-overflow: ellipsis;
+      border-radius: 10px;
+      display: none;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .fileUpload {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+
+    .loading {
+      display: none;
+    }
+
+
+    .qrcode {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-    <div>
-        <div class="qr-code-container">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="150"
-                height="150" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512"
-                xml:space="preserve" class="">
-                <g>
-                    <defs>
-                        <clipPath id="a" clipPathUnits="userSpaceOnUse">
-                            <path d="M0 512h512V0H0Z" fill="#ffffff" opacity="1" data-original="#000000"></path>
-                        </clipPath>
-                    </defs>
-                    <g clip-path="url(#a)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)">
-                        <path d="M0 0v80h80"
-                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                            transform="translate(20 412)" fill="none" stroke="#ffffff" stroke-width="40"
-                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
-                        </path>
-                        <path d="M0 0h80v-80"
-                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                            transform="translate(412 492)" fill="none" stroke="#ffffff" stroke-width="40"
-                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
-                        </path>
-                        <path d="M0 0h-80v80"
-                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                            transform="translate(100 20)" fill="none" stroke="#ffffff" stroke-width="40"
-                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
-                        </path>
-                        <path d="M0 0v-80h-80"
-                            style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                            transform="translate(492 100)" fill="none" stroke="#ffffff" stroke-width="40"
-                            stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                            stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class="">
-                        </path>
-                    </g>
-                    <path d="M216 296H96v120h120zM416 296H296v120h120zM216 96H96v120h120z"
-                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                        transform="matrix(1.33333 0 0 -1.33333 0 682.667)" fill="none" stroke="#ffffff"
-                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
-                    <path d="M0 0v-40h40v-40"
-                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                        transform="matrix(1.33333 0 0 -1.33333 394.667 394.667)" fill="none" stroke="#ffffff"
-                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
-                    <path d="M0 0h40"
-                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                        transform="matrix(1.33333 0 0 -1.33333 501.333 554.667)" fill="none" stroke="#ffffff"
-                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
-                    <path d="M0 0h40v-40"
-                        style="stroke-width:40;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                        transform="matrix(1.33333 0 0 -1.33333 501.333 394.667)" fill="none" stroke="#ffffff"
-                        stroke-width="40" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10"
-                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
-                    <path d="M0 0h40"
-                        style="stroke-width:40;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                        transform="matrix(1.33333 0 0 -1.33333 368 554.667)" fill="none" stroke="#ffffff"
-                        stroke-width="40" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
-                        stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1" class=""></path>
-                </g>
-            </svg>
 
-            <div class="view-link"> <a href="./ar-view.html">Tap Here : https://ar-view-test.netlify.app/</a></div>
-
-        </div>
+  <div class="file-upload-container">
+    <div class="fileUpload">
+      <input type="file" class="inp" accept=".glb" onchange="getFileData(event)" />
+      <button onclick="selectFile()" class="selectFile">Upload 3D modal</button>
+      <span class="filedata"></span>
+      <div class="progressBar">
+        <div class="progress"></div>
+      </div>
+      <button onclick="uploadFile()" class="upload">Upload</button>
+      <span class="loading">Loading...</span>
+      <div id="qrcode"></div>
     </div>
+  </div>
+
+
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-storage.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyApUbmibKjpw6a95WEaYhCQke4Mt4JGzvg",
+      authDomain: "artest-3a98f.firebaseapp.com",
+      projectId: "artest-3a98f",
+      storageBucket: "artest-3a98f.firebasestorage.app",
+      messagingSenderId: "442634337147",
+      appId: "1:442634337147:web:aab2a7c484156f78941bde",
+      measurementId: "G-418NPPTDCX"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const storage = getStorage(app);
+
+    const inp = document.querySelector(".inp");
+    const progressbar = document.querySelector(".progress");
+    const fileData = document.querySelector(".filedata");
+    const qrcode = document.querySelector('#qrcode')
+    const loading = document.querySelector(".loading");
+    let file;
+    let fileName;
+    let progress;
+    let isLoading = false;
+    let uploadedFileName;
+
+    window.selectFile = () => {
+      inp.click();
+    };
+
+    window.getFileData = (e) => {
+      file = e.target.files[0];
+      fileName = Math.round(Math.random() * 9999) + file.name;
+      if (fileName) {
+        fileData.style.display = "block";
+      }
+      fileData.innerHTML = fileName;
+      console.log(file, fileName);
+    };
+
+    window.uploadFile = () => {
+      if (!file) {
+        alert("Please select a file first!");
+        return;
+      }
+
+      loading.style.display = "block";
+
+      const storageRef = ref(storage, `Modals/${fileName}`);
+
+
+      const uploadtask = uploadBytesResumable(storageRef, file);
+
+
+      uploadtask.on(
+        "state_changed",
+        (snapshot) => {
+          console.log("Snapshot", snapshot.ref.name);
+          
+          progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          progress = Math.round(progress);
+          progressbar.style.width = progress + "%";
+          progressbar.innerHTML = progress + "%";
+          uploadedFileName = snapshot.ref.name;
+        },
+        (error) => {
+          console.error("Upload failed", error);
+          loading.style.display = "none";
+          alert("Upload failed: " + error.message);
+        },
+        () => {
+          getDownloadURL(uploadtask.snapshot.ref)
+            .then((url) => {
+              console.log("URL", url);
+              if (!url) {
+                qrcode.style.display = "none";
+              } else {
+                qrcode.style.display = "block";
+                loading.style.display = "none";
+              }
+              const pageUrl = `${location.origin}${location.pathname.replace(/\/[^/]*$/, '/') }ar-view.html?url=${url}`;
+              const generateQRcode = new QRCode(document.getElementById('qrcode'), {
+                text: pageUrl,
+                width: 128,
+                height: 128,
+                colorDark: '#000',
+                colorLight: '#fff',
+                correctLevel: QRCode.CorrectLevel.L
+              });
+              alert("File Uploaded Successfully!");
+              console.log('pageUrl', pageUrl);
+            })
+            .catch((error) => {
+              console.error("Error getting download URL", error);
+              loading.style.display = "none";
+              alert("Error getting download URL: " + error.message);
+            });
+          console.log("File Uploaded Successfully");
+        }
+      );
+    };
+  </script>
 </body>
 
 </html>

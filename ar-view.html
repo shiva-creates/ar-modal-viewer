@@ -8,14 +8,16 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
-        body{
+
+        body {
             background-color: rgb(34 34 34);
         }
-        .modal-viewer{
+
+        .modal-viewer {
 
             height: 95vh;
             width: 100vw;
@@ -27,10 +29,18 @@
 <body>
     <model-viewer class="modal-viewer"
         alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-        src="./assets/Chair.glb" ar 
-         shadow-intensity="1" camera-controls
-        touch-action="pan-y">
+        src="https://firebasestorage.googleapis.com/v0/b/artest-3a98f.firebasestorage.app/o/Modals%2F8782Chair.glb?alt=media&token=a166896d-01dc-4c5d-9906-c18f2506aca6"
+        ar shadow-intensity="1" camera-controls touch-action="pan-y">
     </model-viewer>
+
+
+    <script>
+        //  const params = new URLSearchParams(window.location.search);
+        const queryParams = window.location.search;
+        const url = queryParams.replace('?url=', '');
+        let modalViewer = document.querySelector('.modal-viewer');
+        modalViewer.setAttribute('src', url);
+    </script>
 </body>
 
 </html>
