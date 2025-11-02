@@ -61,15 +61,10 @@
       await mv.updateComplete;
 
       try {
-        if (typeof mv.enterAR === 'function') {
-            let isLoading = true;
+   
             loadingEle.style.display = 'none';
           const result = await mv.enterAR();
           console.log('AR launched:', result);
-        } else {
-            loadingEle.style.display = 'none';
-          console.warn('enterAR() not supported on this device/browser.');
-        }
       } catch (err) {
         console.error('Failed to start AR:', err);
       }
