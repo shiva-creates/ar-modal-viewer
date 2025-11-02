@@ -12,10 +12,14 @@
       const encodedUrl = encodeURIComponent(glbUrl);
       const fallback = encodeURIComponent(window.location.href);
 
-      const intent = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedUrl}#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${fallback};end`;
+      const intent = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedUrl}&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${fallback};end`;
 
       // Auto-launch Scene Viewer
       window.location.replace(intent);
     </script>
   </body>
 </html>
+
+
+
+<!-- <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;">View Avocado in AR</a> -->
