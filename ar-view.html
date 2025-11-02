@@ -22,21 +22,12 @@
             height: 95vh;
             width: 100vw;
         }
-        #loading-ele{
-           position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%); 
-           font-size: 2rem;
-           font-weight: bold;
-           color: rgb(195, 195, 195);
-        }
     </style>
 
 </head>
 
 <body>
-    <div id="loading-ele">LOADING...</div>
+
     <model-viewer class="modal-viewer" id="mv"
         alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
         src="https://firebasestorage.googleapis.com/v0/b/artest-3a98f.firebasestorage.app/o/Modals%2F8782Chair.glb?alt=media&token=a166896d-01dc-4c5d-9906-c18f2506aca6"
@@ -51,29 +42,6 @@
         let modalViewer = document.querySelector('.modal-viewer');
         modalViewer.setAttribute('src', url);
     </script> -->
-
-      <script type="module">
-    const mv = document.getElementById('mv');
-    const loadingEle = document.getElementById('loading-ele');
-    let isLoading = true;
-
-    async function tryEnterAR() {
-      await mv.updateComplete;
-
-      try {
-   
-            loadingEle.style.display = 'none';
-          const result = await mv.enterAR();
-          console.log('AR launched:', result);
-      } catch (err) {
-        console.error('Failed to start AR:', err);
-      }
-    }
-
-    window.addEventListener('load', () => {
-        tryEnterAR();
-    });
-  </script>
 </body>
 
 </html>

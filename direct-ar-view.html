@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+  const glbUrl = "https://firebasestorage.googleapis.com/v0/b/artest-3a98f.firebasestorage.app/o/Modals%2F8782Chair.glb?alt=media&token=a166896d-01dc-4c5d-9906-c18f2506aca6";
+  const encodedUrl = encodeURIComponent(glbUrl);
+  const intent = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedUrl}#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(window.location.href)};end`;
+  window.location.href = intent;
+</script>
+</body>
+</html>
