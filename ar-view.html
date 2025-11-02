@@ -27,20 +27,49 @@
 </head>
 
 <body>
-    <model-viewer class="modal-viewer"
+    <div id="loading-ele">Loading...</div>
+    <model-viewer class="modal-viewer" id="mv"
         alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
         src="https://firebasestorage.googleapis.com/v0/b/artest-3a98f.firebasestorage.app/o/Modals%2F8782Chair.glb?alt=media&token=a166896d-01dc-4c5d-9906-c18f2506aca6"
         ar shadow-intensity="1" camera-controls touch-action="pan-y">
     </model-viewer>
 
 
-    <script>
+    <!-- <script>
         //  const params = new URLSearchParams(window.location.search);
         const queryParams = window.location.search;
         const url = queryParams.replace('?url=', '');
         let modalViewer = document.querySelector('.modal-viewer');
         modalViewer.setAttribute('src', url);
-    </script>
+    </script> -->
+
+      <script type="module">
+    const mv = document.getElementById('mv');
+    const loadingEle = document.getElementById('loading-ele');
+    let isLoading = true;
+
+    async function tryEnterAR() {
+      await mv.updateComplete;
+
+      try {
+        if (typeof mv.enterAR === 'function') {
+            let isLoading = true;
+          const result = await mv.enterAR();
+          console.log('AR launched:', result);
+        } else {
+          console.warn('enterAR() not supported on this device/browser.');
+        }
+      } catch (err) {
+        console.error('Failed to start AR:', err);
+      }
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        tryEnterAR();
+      }, 800);
+    });
+  </script>
 </body>
 
 </html>
