@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auto Launch AR</title>
+  </head>
+  <body>
+    <script>
+      const glbUrl =
+        "https://firebasestorage.googleapis.com/v0/b/artest-3a98f.firebasestorage.app/o/Modals%2F8133VillaTugen.glb?alt=media&token=0f7e869f-1cb5-4d16-88e8-035b8fc0f167";
+      const encodedUrl = encodeURIComponent(glbUrl);
+      const fallback = encodeURIComponent(window.location.href);
+
+      const intent = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedUrl}&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${fallback};end`;
+
+      // Auto-launch Scene Viewer
+      window.location.replace(intent);
+    </script>
+  </body>
+</html>
+
+
+
+<!-- <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;">View Avocado in AR</a> -->
