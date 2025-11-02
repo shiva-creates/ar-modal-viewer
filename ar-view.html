@@ -22,12 +22,21 @@
             height: 95vh;
             width: 100vw;
         }
+        #loading-ele{
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%); 
+           font-size: 2rem;
+           font-weight: bold;
+           color: rgb(195, 195, 195);
+        }
     </style>
 
 </head>
 
 <body>
-    <div id="loading-ele">Loading...</div>
+    <div id="loading-ele">LOADING...</div>
     <model-viewer class="modal-viewer" id="mv"
         alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
         src="https://firebasestorage.googleapis.com/v0/b/artest-3a98f.firebasestorage.app/o/Modals%2F8782Chair.glb?alt=media&token=a166896d-01dc-4c5d-9906-c18f2506aca6"
@@ -54,9 +63,11 @@
       try {
         if (typeof mv.enterAR === 'function') {
             let isLoading = true;
+            loadingEle.style.display = 'none';
           const result = await mv.enterAR();
           console.log('AR launched:', result);
         } else {
+            loadingEle.style.display = 'none';
           console.warn('enterAR() not supported on this device/browser.');
         }
       } catch (err) {
